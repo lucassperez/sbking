@@ -2,10 +2,25 @@ package br.com.sbk.sbking.core;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 @SuppressWarnings("serial")
 public class Card implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Enumerated(EnumType.STRING)
 	private Suit suit;
+
+	@Enumerated(EnumType.STRING)
 	private Rank rank;
 
 	public Card(Suit suit, Rank rank) {
@@ -81,6 +96,21 @@ public class Card implements Serializable {
 	@Override
 	public String toString() {
 		return this.suit.getSymbol() + this.rank.getSymbol();
+	}
+
+	/**
+	 * @deprecated Hibernate only
+	 */
+
+	public Card() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
